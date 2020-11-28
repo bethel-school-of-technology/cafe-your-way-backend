@@ -4,9 +4,10 @@ var hbs = require('hbs');
 var users = require('../models/users');
 var index = require('../models/index')
 
+
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { 
+  res.render('users', { 
     title: 'Café Your Way' ,
     items: ['Specialty Coffees', 'Herbal Teas', 'Delicious Pastries']
   });
@@ -20,7 +21,7 @@ router.get('/signup', function(req, res) {
 
 // POST profile page
 router.post('/profile', function(req, res) {
-    res.render('userprofile', {
+    res.render('userProfile', {
     title: 'Café Your Way' });
 });
 

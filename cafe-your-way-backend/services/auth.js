@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const models = require('../models/index');
+const models = require('../models');
 const bcrypt = require('bcryptjs');
 
 var authService = {
@@ -24,7 +24,6 @@ var authService = {
         } catch (err) {
             console.log(err);
             return null;
-
         }
     },
     hashPassword: function(plainTextPassword){
@@ -34,7 +33,9 @@ var authService = {
     },
     comparePasswords: function(plainTextPassword, hashedPassword) {
         return bcrypt.compareSync(plainTextPassword, hashedPassword);
-    }
+    
+    },
+  
 }
 
 module.exports = authService;
