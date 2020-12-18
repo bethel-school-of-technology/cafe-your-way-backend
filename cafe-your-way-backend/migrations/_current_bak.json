@@ -112,6 +112,13 @@
         "customers_users": {
             "tableName": "customers_users",
             "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "CustomerId": {
                     "allowNull": false,
                     "field": "CustomerId",
@@ -131,28 +138,6 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
-                },
-                "customer_id": {
-                    "primaryKey": true,
-                    "references": {
-                        "model": "customers",
-                        "key": "CustomerId"
-                    },
-                    "onDelete": "CASCADE",
-                    "onUpdate": "CASCADE",
-                    "field": "customer_id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "user_id": {
-                    "primaryKey": true,
-                    "references": {
-                        "model": "users",
-                        "key": "UserId"
-                    },
-                    "onDelete": "CASCADE",
-                    "onUpdate": "CASCADE",
-                    "field": "user_id",
-                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -265,10 +250,6 @@
                     "field": "Password",
                     "seqType": "Sequelize.STRING"
                 },
-                "Admin": {
-                    "field": "Admin",
-                    "seqType": "Sequelize.BOOLEAN"
-                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -283,5 +264,5 @@
             "indexes": []
         }
     },
-    "revision": 9
+    "revision": 8
 }

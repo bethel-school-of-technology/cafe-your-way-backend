@@ -1,14 +1,52 @@
+// @ts-nocheck
 var  express = require('express');
 const res = require('express/lib/response');
+var hbs = require('hbs');
 var router = express.Router();
 var models = require('../models');
-const users = require('../models/users');
+var users = require('../models/users');
 var authService = require('../services/auth');
+var customers = require('../models/customers');
+var products = require('../models/products');
+var orders = require('../models/orders');
+var OrderDetails = require('../models/OrderDetails');
+const { redirect } = require('express/lib/response');
+
+// GET ALL users listing. */
+router.get('/', function(req, res) {
+  models.users.findAll({}).then(users => {
+    res.json({ users });
+  })
+});
 
 
-// GET users listing. */
-router.get('/', function (req, res) {
-res.json({ message: 'respond with a resource'});
+// GET BY ID users listing
+router.get('/:id', function (req, res) {
+  models.users.findOne({
+    where: { UserId: parseInt(req.params.id)
+    }})
+    .then(userFound => {
+      if(userFound) {
+        res.json(
+        {
+          UserId:          userFound.UserId,
+          FirstName:       userFound.FirstName,
+          LastName:        userFound.LastName,
+          PhysicalAddress: userFound.PhysicalAddress,
+          PhoneNumber:     userFound.PhoneNumber,
+          Email:           userFound.Email,
+          UserName:        userFound.UserName
+        });
+      } else {
+        res.json('User not found');
+      }
+    })
+  });
+
+  
+// GET Signup route
+router.get('/signup', function(req, res) {
+  res.json({ signup });
 });
 
 
@@ -21,8 +59,8 @@ router.post('/signup', function(req, res) {
       LastName: req.body.lastName,
       PhysicalAddress: req.body.physicalAddress,
       PhoneNumber: req.body.phoneNumber,
-      Email: req.body.email,
-      Password: authService.hashPassword(req.body.password)  
+      Email: req.body.Email,
+      Password: authService.hashPassword(req.body.Password)  
     }
   })
 .spread(function(result, created) {
@@ -34,6 +72,11 @@ router.post('/signup', function(req, res) {
     res.json({ message: 'This user already exists'});
     }
   });
+});
+
+// GET login route
+router.get('/login', function(req, res) {
+  res.json({login});
 });
 
 
@@ -62,8 +105,8 @@ router.post('/login', function(req, res) {
 });
 
 
-// GET LOGOUT (user logs out using JWT token that expires immediately)
-router.get('/logout', function(req, res) {
+// POST LOGOUT (user logs out using JWT token that expires immediately)
+router.post('/logout', function(req, res) {
   res.cookie('jwt', '', {expires: new Date(0) });
   res.json({ message: 'Successfully logged out'});
 });
@@ -83,8 +126,37 @@ router.get('/profile', function(req, res) {
     });
   } else {
     res.status(401).json({ message: 'Must be logged in'});
-  }
+  };
 });
 
 
+// PUT Update User by ID
+router.put("/:id", function (req, res) {
+  let userId = parseInt(req.params.id);
+  models.users
+    .update(req.body, { where: { UserId: userId } })
+    .then(result => res.redirect('/users/' + userId))
+    .catch(err => {
+      res.status(400).json({ message: "There was a problem updating the user. Please check the user information."});
+    });
+});
+
+
+// DELETE User by ID
+router.delete("/:id", function (req, res) {
+  let userId = parseInt(req.params.id);
+  models.users
+    .destroy({where: { UserId: userId }})
+    .then(result => res.json({message: 'User successfully deleted.'}))
+    .catch(err => { 
+      res.status(400).json({ message: "There was a problem deleting the user. Please make sure you are specifying the user id."});
+    }
+);
+});
+
+
+
+  
+
 module.exports = router;
+
