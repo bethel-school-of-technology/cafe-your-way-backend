@@ -35,7 +35,14 @@ var authService = {
         return bcrypt.compareSync(plainTextPassword, hashedPassword);
     
     },
-  
+    authRole(role) {
+    //  return (req, res, next) => {
+    //      if (req.user.role ==role) {
+    //      res.status(401).json({ message: 'Not allowed'});
+    //      }
+    //      next()
+    //  }
+ } 
 }
 
 module.exports = authService;

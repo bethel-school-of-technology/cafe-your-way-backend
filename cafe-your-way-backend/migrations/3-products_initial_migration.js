@@ -5,58 +5,46 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * createTable "users", deps: []
+ * createTable "products", deps: []
  *
  **/
 
 var info = {
-    "revision": 1,
-    "name": "initial_migration",
-    "created": "2020-11-22T00:16:32.969Z",
+    "revision": 3,
+    "name": "products_initial_migration",
+    "created": "2020-12-03T04:50:04.557Z",
     "comment": ""
 };
 
 var migrationCommands = [{
     fn: "createTable",
     params: [
-        "users",
+        "products",
         {
-            "UserId": {
+            "ProductId": {
                 "type": Sequelize.INTEGER,
-                "field": "UserId",
+                "field": "ProductId",
                 "primaryKey": true,
                 "autoIncrement": true,
                 "allowNull": false
             },
-            "FirstName": {
+            "ProductName": {
                 "type": Sequelize.STRING,
-                "field": "FirstName"
+                "field": "ProductName",
+                "alllowNull": false,
+             
             },
-            "LastName": {
-                "type": Sequelize.STRING,
-                "field": "LastName"
+            "ProductPrice": {
+                "type": Sequelize.DECIMAL(18, 2),
+                "field": "ProductPrice",
+                "allowNull": false,
+               
             },
-            "PhysicalAddress": {
+            "ImageUrl": {
                 "type": Sequelize.STRING,
-                "field": "PhysicalAddress"
-            },
-            "PhoneNumber": {
-                "type": Sequelize.STRING,
-                "field": "PhoneNumber"
-            },
-            "Email": {
-                "type": Sequelize.STRING,
-                "field": "Email",
-                "unique": true
-            },
-            "UserName": {
-                "type": Sequelize.STRING,
-                "field": "UserName",
-                "unique": true
-            },
-            "Password": {
-                "type": Sequelize.STRING,
-                "field": "Password"
+                "field": "ImageUrl",
+                "allowNull": false,
+         
             },
             "createdAt": {
                 "type": Sequelize.DATE,

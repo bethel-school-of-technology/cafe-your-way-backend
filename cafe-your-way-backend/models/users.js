@@ -6,7 +6,11 @@ module.exports = (sequelize, DataTypes) => {
 
   class users extends sequelize.Model {
 
+    static associate(models) {
+      // define association here
+    }
   };
+  
   users.init({
     UserId: {
       type: DataTypes.INTEGER,
@@ -20,16 +24,24 @@ module.exports = (sequelize, DataTypes) => {
     PhoneNumber: DataTypes.STRING,
     Email: {
       type: DataTypes.STRING,
-      unique: true
+      unique: true,
     },
     UserName: {
       type: DataTypes.STRING,
-      unique: true
+      unique: true,
     },
-    Password: DataTypes.STRING
-  }, {
+    Password: DataTypes.STRING,
+
+    Admin: {
+      type: DataTypes.BOOLEAN, default: false,
+      // allowNull: false
+    },
+  },
+  {
     sequelize,
     modelName: 'users',
+  
   });
-  return users
+
+  return users;
 };

@@ -3,9 +3,16 @@
         "OrderDetails": {
             "tableName": "OrderDetails",
             "schema": {
-                "OrderId": {
+                "id": {
                     "allowNull": false,
                     "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "OrderId": {
+                    "allowNull": false,
+                    "primaryKey": false,
                     "field": "OrderId",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -259,7 +266,6 @@
                     "seqType": "Sequelize.STRING"
                 },
                 "Admin": {
-                    "default": false,
                     "field": "Admin",
                     "seqType": "Sequelize.BOOLEAN"
                 },
@@ -277,5 +283,5 @@
             "indexes": []
         }
     },
-    "revision": 10
+    "revision": 9
 }
