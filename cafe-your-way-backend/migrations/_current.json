@@ -3,9 +3,22 @@
         "OrderDetails": {
             "tableName": "OrderDetails",
             "schema": {
+<<<<<<< HEAD
                 "OrderId": {
                     "allowNull": false,
                     "primaryKey": true,
+=======
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "OrderId": {
+                    "allowNull": false,
+                    "primaryKey": false,
+>>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
                     "field": "OrderId",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -259,7 +272,10 @@
                     "seqType": "Sequelize.STRING"
                 },
                 "Admin": {
+<<<<<<< HEAD
                     "default": false,
+=======
+>>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
                     "field": "Admin",
                     "seqType": "Sequelize.BOOLEAN"
                 },
@@ -277,5 +293,9 @@
             "indexes": []
         }
     },
+<<<<<<< HEAD
     "revision": 10
+=======
+    "revision": 9
+>>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
 }

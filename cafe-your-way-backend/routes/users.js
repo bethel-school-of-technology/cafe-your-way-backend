@@ -11,12 +11,51 @@ var products = require('../models/products');
 var orders = require('../models/orders');
 var OrderDetails = require('../models/OrderDetails');
 const { redirect } = require('express/lib/response');
+<<<<<<< HEAD
 
 // GET ALL users listing. */
 router.get('/', function(req, res) {
   models.users.findAll({}).then(users => {
     res.json({ users });
   })
+=======
+
+// GET ALL users listing. */
+router.get('/', function(req, res) {
+  models.users.findAll({}).then(users => {
+    res.json({ users });
+  })
+});
+
+
+// GET BY ID users listing
+router.get('/:id', function (req, res) {
+  models.users.findOne({
+    where: { UserId: parseInt(req.params.id)
+    }})
+    .then(userFound => {
+      if(userFound) {
+        res.json(
+        {
+          UserId:          userFound.UserId,
+          FirstName:       userFound.FirstName,
+          LastName:        userFound.LastName,
+          PhysicalAddress: userFound.PhysicalAddress,
+          PhoneNumber:     userFound.PhoneNumber,
+          Email:           userFound.Email,
+          UserName:        userFound.UserName
+        });
+      } else {
+        res.json('User not found');
+      }
+    })
+  });
+
+  
+// GET Signup route
+router.get('/signup', function(req, res) {
+  res.json({ signup });
+>>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
 });
 
 
@@ -67,6 +106,11 @@ router.post('/signup', function(req, res) {
     res.json({ message: 'This user already exists'});
     }
   });
+});
+
+// GET login route
+router.get('/login', function(req, res) {
+  res.json({login});
 });
 
 
@@ -145,9 +189,18 @@ router.delete("/:id", function (req, res) {
 );
 });
 
+<<<<<<< HEAD
 // router.get('/admin', authUser, (req, res) => {
 //   res.json(Admin)
 // })
 
 
 module.exports = router;
+=======
+
+
+  
+
+module.exports = router;
+
+>>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9

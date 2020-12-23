@@ -13,7 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     OrderId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+<<<<<<< HEAD
       primaryKey: true,
+=======
+      primaryKey: false,
+        // primaryKey: true,
+>>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
         // autoIncrement: true,
     },
     ProductId: {

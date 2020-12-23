@@ -112,6 +112,16 @@
         "customers_users": {
             "tableName": "customers_users",
             "schema": {
+<<<<<<< HEAD
+=======
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+>>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
                 "CustomerId": {
                     "allowNull": false,
                     "field": "CustomerId",
@@ -131,6 +141,7 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+<<<<<<< HEAD
                 },
                 "customer_id": {
                     "primaryKey": true,
@@ -153,6 +164,8 @@
                     "onUpdate": "CASCADE",
                     "field": "user_id",
                     "seqType": "Sequelize.INTEGER"
+=======
+>>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
                 }
             },
             "indexes": []
@@ -265,10 +278,13 @@
                     "field": "Password",
                     "seqType": "Sequelize.STRING"
                 },
+<<<<<<< HEAD
                 "Admin": {
                     "field": "Admin",
                     "seqType": "Sequelize.BOOLEAN"
                 },
+=======
+>>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -283,5 +299,9 @@
             "indexes": []
         }
     },
+<<<<<<< HEAD
     "revision": 9
+=======
+    "revision": 8
+>>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
 }
