@@ -83,11 +83,8 @@ router.put("/:id", function (req, res) {
 
 
 module.exports = router;
-<<<<<<< HEAD
-=======
 
 
 
 
 
->>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9

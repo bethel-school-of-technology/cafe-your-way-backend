@@ -11,14 +11,6 @@ var products = require('../models/products');
 var orders = require('../models/orders');
 var OrderDetails = require('../models/OrderDetails');
 const { redirect } = require('express/lib/response');
-<<<<<<< HEAD
-
-// GET ALL users listing. */
-router.get('/', function(req, res) {
-  models.users.findAll({}).then(users => {
-    res.json({ users });
-  })
-=======
 
 // GET ALL users listing. */
 router.get('/', function(req, res) {
@@ -51,40 +43,9 @@ router.get('/:id', function (req, res) {
     })
   });
 
-  
-// GET Signup route
-router.get('/signup', function(req, res) {
-  res.json({ signup });
->>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
-});
-
-
-// GET BY ID users listing
-router.get('/:id', function (req, res) {
-  models.users.findOne({
-    where: { UserId: parseInt(req.params.id)
-    }})
-    .then(userFound => {
-      if(userFound) {
-        res.json(
-        {
-          UserId:          userFound.UserId,
-          FirstName:       userFound.FirstName,
-          LastName:        userFound.LastName,
-          PhysicalAddress: userFound.PhysicalAddress,
-          PhoneNumber:     userFound.PhoneNumber,
-          Email:           userFound.Email,
-          UserName:        userFound.UserName
-        });
-      } else {
-        res.json('User not found');
-      }
-    })
-  });
 
   
-
-// POST SIGNUP (users sign up and create an account if an account does not exist and returns JWT token as cookie)
+// POST SIGNUP users (users sign up and create an account if an account does not exist and returns JWT token as cookie)
 router.post('/signup', function(req, res) {
   models.users.findOrCreate({
     where: { UserName: req.body.userName },
@@ -107,12 +68,6 @@ router.post('/signup', function(req, res) {
     }
   });
 });
-
-// GET login route
-router.get('/login', function(req, res) {
-  res.json({login});
-});
-
 
 
 // POST LOGIN (users login and JWT is returned as cookie.  User is authenticated with a JWT token.
@@ -147,24 +102,6 @@ router.post('/logout', function(req, res) {
 });
 
 
-// GET PROFILE (a user will only be able to access and view their profile and no one else's profile once they are logged in). This route will use the authentication service to determine if a user can be found based on the JWT token stored as a cookie. This route will use the authentication service .verifyUser() method.
-router.get('/profile', function(req, res) {
-  let token = req.cookies.jwt;
-  if (token) {
-  authService.verifyUser(token)
-    .then(user => {
-      if (user) {
-        res.json({ user} )
-      } else {
-        res.status(401).json({ message: 'Invalid authentication token'});
-      }
-    });
-  } else {
-    res.status(401).json({ message: 'Must be logged in'});
-  };
-});
-
-
 // PUT Update User by ID
 router.put("/:id", function (req, res) {
   let userId = parseInt(req.params.id);
@@ -189,18 +126,28 @@ router.delete("/:id", function (req, res) {
 );
 });
 
-<<<<<<< HEAD
-// router.get('/admin', authUser, (req, res) => {
-//   res.json(Admin)
-// })
+
+// **************************DO NOT USE THIS PROFILE ROUTE*******************************
+// GET PROFILE (a user will only be able to access and view their profile and no one else's profile once they are logged in). This route will use the authentication service to determine if a user can be found based on the JWT token stored as a cookie. This route will use the authentication service .verifyUser() method.
+// router.get('/profile', function(req, res) {
+//   let token = req.cookies.jwt;
+//   if (token) {
+//   authService.verifyUser(token)
+//     .then(user => {
+//       if (user) {
+//         res.json({ user} )
+//       } else {
+//         res.status(401).json({ message: 'Invalid authentication token'});
+//       }
+//     });
+//   } else {
+//     res.status(401).json({ message: 'Must be logged in'});
+//   };
+// });
+// **************************DO NOT USE THIS PROFILE ROUTE***********************************
+ 
+
 
 
 module.exports = router;
-=======
 
-
-  
-
-module.exports = router;
-
->>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9

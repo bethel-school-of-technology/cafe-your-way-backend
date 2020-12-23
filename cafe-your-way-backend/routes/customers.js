@@ -76,7 +76,7 @@ router.delete("/:id", function (req, res) {
     .destroy({where: { CustomerId: customerId }})
     .then(result => res.json({message: 'Customer successfully deleted.'}))
     .catch(err => { 
-      res.status(400).json({ message: "There was a problem deleting the Customer. Please make sure you are specifying the customer id."});
+      res.status(400).json({ message: "There was a problem deleting the customer. Please make sure you are specifying the customer id."});
     }
 );
 });

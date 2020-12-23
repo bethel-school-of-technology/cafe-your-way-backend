@@ -27,13 +27,8 @@ router.get('/:id', function (req, res) {
         res.json(
         {
           OrderId:    OrderDetailFound.OrderId,
-<<<<<<< HEAD
           ProductId:  OrderDetailFound.ProductId,
           Quantity:   OrderDetailFound.Quantity
-=======
-          CustomerId: OrderDetailFound.CustomerId,
-          OrderDate:  OrderDetailFound.OrderDate
->>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
         });
       } else {
         res.json('Order Details not found');
@@ -56,11 +51,7 @@ router.post('/', function(req, res) {
   if (created) {
   res.json({ message: 'Order Details were successfully created'});
   } else {
-<<<<<<< HEAD
     res.status(400).json({ message: 'Order Details already exists'});
-=======
-    res.status(400).json({ message: 'These Order Details already exists'});
->>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
   }
   })
 });
