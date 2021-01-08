@@ -1,32 +1,108 @@
 {
     "tables": {
-        "OrderDetails": {
-            "tableName": "OrderDetails",
+        "orders": {
+            "tableName": "orders",
             "schema": {
-<<<<<<< HEAD
                 "OrderId": {
                     "allowNull": false,
-                    "primaryKey": true,
-=======
-                "id": {
-                    "allowNull": false,
-                    "primaryKey": true,
                     "autoIncrement": true,
-                    "field": "id",
+                    "primaryKey": true,
+                    "field": "OrderId",
                     "seqType": "Sequelize.INTEGER"
                 },
+                "UserId": {
+                    "field": "UserId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "UserId"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "FirstName": {
+                    "allowNull": false,
+                    "field": "FirstName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "LastName": {
+                    "allowNull": false,
+                    "field": "LastName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "Email": {
+                    "allowNull": false,
+                    "field": "Email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "PhoneNumber": {
+                    "allowNull": false,
+                    "field": "PhoneNumber",
+                    "seqType": "Sequelize.STRING"
+                },
+                "OrderTotal": {
+                    "field": "OrderTotal",
+                    "seqType": "Sequelize.DECIMAL(18, 2)"
+                },
+                "OrderDate": {
+                    "allowNull": false,
+                    "field": "OrderDate",
+                    "seqType": "Sequelize.DATE"
+                },
+                "Deleted": {
+                    "field": "Deleted",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "orders_products": {
+            "tableName": "orders_products",
+            "schema": {
                 "OrderId": {
                     "allowNull": false,
-                    "primaryKey": false,
->>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
+                    "primaryKey": true,
+                    "references": {
+                        "model": "orders",
+                        "key": "OrderId"
+                    },
                     "field": "OrderId",
+                    "unique": "orders_products_OrderId_ProductId_unique",
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
                 },
                 "ProductId": {
                     "allowNull": false,
-                    "primaryKey": false,
+                    "primaryKey": true,
+                    "references": {
+                        "model": "products",
+                        "key": "ProductId"
+                    },
                     "field": "ProductId",
+                    "unique": "orders_products_OrderId_ProductId_unique",
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
+                },
+                "ProductName": {
+                    "field": "ProductName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "ProductPrice": {
+                    "field": "ProductPrice",
+                    "seqType": "Sequelize.DECIMAL(18, 2)"
                 },
                 "Quantity": {
                     "allowNull": false,
@@ -46,14 +122,53 @@
             },
             "indexes": []
         },
-        "customers": {
-            "tableName": "customers",
+        "products": {
+            "tableName": "products",
             "schema": {
-                "CustomerId": {
+                "ProductId": {
                     "allowNull": false,
                     "autoIncrement": true,
                     "primaryKey": true,
-                    "field": "CustomerId",
+                    "field": "ProductId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "ProductName": {
+                    "field": "ProductName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "ProductPrice": {
+                    "field": "ProductPrice",
+                    "seqType": "Sequelize.DECIMAL(18, 2)"
+                },
+                "ImageUrl": {
+                    "field": "ImageUrl",
+                    "seqType": "Sequelize.STRING"
+                },
+                "Deleted": {
+                    "field": "Deleted",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "users": {
+            "tableName": "users",
+            "schema": {
+                "UserId": {
+                    "allowNull": false,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "UserId",
                     "seqType": "Sequelize.INTEGER"
                 },
                 "FirstName": {
@@ -93,173 +208,13 @@
                     "seqType": "Sequelize.STRING"
                 },
                 "ZipCode": {
-                    "allowNull": true,
+                    "allowNull": false,
                     "field": "ZipCode",
                     "seqType": "Sequelize.STRING"
                 },
                 "PhoneNumber": {
                     "allowNull": false,
                     "field": "PhoneNumber",
-                    "seqType": "Sequelize.STRING"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": []
-        },
-        "customers_users": {
-            "tableName": "customers_users",
-            "schema": {
-                "CustomerId": {
-                    "allowNull": false,
-                    "field": "CustomerId",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "UserId": {
-                    "allowNull": false,
-                    "field": "UserId",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "customer_id": {
-                    "primaryKey": true,
-                    "references": {
-                        "model": "customers",
-                        "key": "CustomerId"
-                    },
-                    "onDelete": "CASCADE",
-                    "onUpdate": "CASCADE",
-                    "field": "customer_id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "user_id": {
-                    "primaryKey": true,
-                    "references": {
-                        "model": "users",
-                        "key": "UserId"
-                    },
-                    "onDelete": "CASCADE",
-                    "onUpdate": "CASCADE",
-                    "field": "user_id",
-                    "seqType": "Sequelize.INTEGER"
-                }
-            },
-            "indexes": []
-        },
-        "orders": {
-            "tableName": "orders",
-            "schema": {
-                "OrderId": {
-                    "allowNull": false,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "field": "OrderId",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "CustomerId": {
-                    "allowNull": false,
-                    "field": "CustomerId",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "OrderDate": {
-                    "allowNull": false,
-                    "field": "OrderDate",
-                    "seqType": "Sequelize.DATE"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": []
-        },
-        "products": {
-            "tableName": "products",
-            "schema": {
-                "ProductId": {
-                    "allowNull": false,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "field": "ProductId",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "ProductName": {
-                    "field": "ProductName",
-                    "seqType": "Sequelize.STRING"
-                },
-                "ProductPrice": {
-                    "field": "ProductPrice",
-                    "seqType": "Sequelize.DECIMAL(18, 2)"
-                },
-                "ImageUrl": {
-                    "field": "ImageUrl",
-                    "seqType": "Sequelize.STRING"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": []
-        },
-        "users": {
-            "tableName": "users",
-            "schema": {
-                "UserId": {
-                    "allowNull": false,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "field": "UserId",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "FirstName": {
-                    "field": "FirstName",
-                    "seqType": "Sequelize.STRING"
-                },
-                "LastName": {
-                    "field": "LastName",
-                    "seqType": "Sequelize.STRING"
-                },
-                "PhysicalAddress": {
-                    "field": "PhysicalAddress",
-                    "seqType": "Sequelize.STRING"
-                },
-                "PhoneNumber": {
-                    "field": "PhoneNumber",
-                    "seqType": "Sequelize.STRING"
-                },
-                "Email": {
-                    "unique": true,
-                    "field": "Email",
                     "seqType": "Sequelize.STRING"
                 },
                 "UserName": {
@@ -272,11 +227,12 @@
                     "seqType": "Sequelize.STRING"
                 },
                 "Admin": {
-<<<<<<< HEAD
                     "default": false,
-=======
->>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
                     "field": "Admin",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "Deleted": {
+                    "field": "Deleted",
                     "seqType": "Sequelize.BOOLEAN"
                 },
                 "createdAt": {
@@ -293,9 +249,5 @@
             "indexes": []
         }
     },
-<<<<<<< HEAD
-    "revision": 10
-=======
-    "revision": 9
->>>>>>> 78c426abab78cf7d0fe2a469d8c8a8c0087e45c9
+    "revision": 2
 }

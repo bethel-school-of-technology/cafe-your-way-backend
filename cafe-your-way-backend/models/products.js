@@ -3,9 +3,9 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  
+
   class products extends sequelize.Model {
-   
+
     static associate(models) {
       // define association here
     }
@@ -20,10 +20,11 @@ module.exports = (sequelize, DataTypes) => {
     ProductName: DataTypes.STRING,
     ProductPrice: DataTypes.DECIMAL(18, 2),
     ImageUrl: DataTypes.STRING,
+    Deleted: DataTypes.BOOLEAN
   },
-  {
-    sequelize,
-    modelName: 'products', 
-});
+    {
+      sequelize,
+      modelName: 'products',
+    });
   return products;
 };

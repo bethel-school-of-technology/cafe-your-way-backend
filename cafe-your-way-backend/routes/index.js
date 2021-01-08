@@ -1,41 +1,44 @@
 var express = require('express');
 var router = express.Router();
-var hbs = require('hbs'); 
+var hbs = require('hbs');
 var models = require('../models');
 var users = require('../models/users');
 var index = require('../models/index');
-var customers = require('../models/customers');
 var products = require('../models/products');
 var orders = require('../models/orders');
-var OrderDetails = require('../models/OrderDetails');
+var authService = require('../services/auth');
+const { authRole, signUser } = require('../services/auth');
 
 
 /* GET home page. */
-router.get('/home', function(req, res) {
-  res.render('users', { 
-    title: 'Café Your Way' ,
+router.get('/home', function (req, res) {
+  res.render('users', {
+    title: 'Café Your Way',
     items: ['Specialty Coffees', 'Herbal Teas', 'Delicious Pastries']
   });
 });
 
 
 // GET signup page
-router.get('/signup', function(req, res) {
+router.get('/signup', function (req, res) {
   res.render('signup', {
-  title: 'Café Your Way'});
+    title: 'Café Your Way'
+  });
 });
 
 
 // POST signup page
-router.post('/signup', function(req, res) {
-    res.render('signup', {
-    title: 'Café Your Way'});
+router.post('/signup', function (req, res) {
+  res.render('signup', {
+    title: 'Café Your Way'
+  });
 });
 
 // POST profile page
-router.post('/profile', function(req, res) {
-    res.render('userProfile', {
-    title: 'Café Your Way' });
+router.post('/profile', function (req, res) {
+  res.render('userProfile', {
+    title: 'Café Your Way'
+  });
 });
 
 

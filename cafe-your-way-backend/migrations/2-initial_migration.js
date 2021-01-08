@@ -5,45 +5,49 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * removeColumn "id" from table "OrderDetails"
- * changeColumn "OrderId" on table "OrderDetails"
- * changeColumn "Admin" on table "users"
+ * addColumn "Deleted" to table "orders"
+ * addColumn "Deleted" to table "products"
+ * addColumn "Deleted" to table "users"
  *
  **/
 
 var info = {
-    "revision": 10,
-    "name": "users_model_admin_migration2",
-    "created": "2020-12-22T07:55:55.041Z",
+    "revision": 2,
+    "name": "initial_migration",
+    "created": "2021-01-06T21:15:48.843Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-        fn: "removeColumn",
-        params: ["OrderDetails", "id"]
-    },
-    {
-        fn: "changeColumn",
+        fn: "addColumn",
         params: [
-            "OrderDetails",
-            "OrderId",
+            "orders",
+            "Deleted",
             {
-                "type": Sequelize.INTEGER,
-                "field": "OrderId",
-                "primaryKey": true,
-                "allowNull": false
+                "type": Sequelize.BOOLEAN,
+                "field": "Deleted"
             }
         ]
     },
     {
-        fn: "changeColumn",
+        fn: "addColumn",
         params: [
-            "users",
-            "Admin",
+            "products",
+            "Deleted",
             {
                 "type": Sequelize.BOOLEAN,
-                "field": "Admin",
-                "default": false
+                "field": "Deleted"
+            }
+        ]
+    },
+    {
+        fn: "addColumn",
+        params: [
+            "users",
+            "Deleted",
+            {
+                "type": Sequelize.BOOLEAN,
+                "field": "Deleted"
             }
         ]
     }

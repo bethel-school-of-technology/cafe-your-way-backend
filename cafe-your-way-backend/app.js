@@ -8,14 +8,13 @@ var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var customersRouter = require('./routes/customers');
-var OrderDetailsRouter = require('./routes/OrderDetails');
 var ordersRouter = require('./routes/orders');
 var productsRouter = require('./routes/products');
 
 
 var app = express();
 
+app.use(cors({ origin: ["http://localhost:4200"], credentials: true}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -28,8 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/customers', customersRouter);
-app.use('/OrderDetails', OrderDetailsRouter);
 app.use('/orders', ordersRouter);
 app.use('/products', productsRouter);
 

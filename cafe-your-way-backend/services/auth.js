@@ -3,46 +3,39 @@ const models = require('../models');
 const bcrypt = require('bcryptjs');
 
 var authService = {
-    signUser: function(user){
+    signUser: function (user) {
         const token = jwt.sign(
             {
-            UserName: user.UserName,
-            UserId: user.UserId
-        }, 
-        'secretkey',
-        {
-            expiresIn: '1h'
-        }
+                UserName: user.UserName,
+                UserId: user.UserId
+            },
+            'secretkey',
+            {
+                expiresIn: '1h'
+            }
         );
         return token;
     },
-    verifyUser: function(token) { 
+    verifyUser: function (token) {
         try {
-            let decoded = jwt.verify(token, 'secretkey'); 
+            let decoded = jwt.verify(token, 'secretkey');
             // @ts-ignore
-            return models.users.findByPk(decoded.UserId); 
+            return models.users.findByPk(decoded.UserId);
         } catch (err) {
             console.log(err);
             return null;
         }
     },
-    hashPassword: function(plainTextPassword){
+    hashPassword: function (plainTextPassword) {
         let salt = bcrypt.genSaltSync(10);
         let hash = bcrypt.hashSync(plainTextPassword, salt);
         return hash;
     },
-    comparePasswords: function(plainTextPassword, hashedPassword) {
+    comparePasswords: function (plainTextPassword, hashedPassword) {
         return bcrypt.compareSync(plainTextPassword, hashedPassword);
-    
+
     },
-    authRole(role) {
-    //  return (req, res, next) => {
-    //      if (req.user.role ==role) {
-    //      res.status(401).json({ message: 'Not allowed'});
-    //      }
-    //      next()
-    //  }
- } 
+
 }
 
 module.exports = authService;
