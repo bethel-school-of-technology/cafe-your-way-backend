@@ -207,7 +207,6 @@ router.post('/', function (req, res) {
 
 
 
-
     // PUT Update Orders by ID (Admin Protected)
     router.put("/:id", function (req, res) {
       let token = req.cookies.jwt;
@@ -233,8 +232,7 @@ router.post('/', function (req, res) {
 
 
 
-
-    // DELETE Order By ID
+    // DELETE Order By ID (Admin Protected)
     router.delete("/:id", function (req, res) {
       let token = req.cookies.jwt;
       if (token) {
@@ -248,36 +246,17 @@ router.post('/', function (req, res) {
                 .catch(err => {
                   res.status(400).json({ message: "There was a problem deleting the order. Please make sure you are specifying the order id." });
                 })
-            }
-          })
+            } else {
+              res.status(401).json({ message: 'Unauthorized User' });
+            };
+          });
+      } else {
+        res.status(401).json({ message: 'Must be logged in' });
       }
-    })
+    });
   }
 })
 
-
-// / DELETE Order By ID (Admin Protected)
-router.delete("/:id", function (req, res) {
-  let token = req.cookies.jwt;
-  if (token) {
-    authService.verifyUser(token)
-      .then(user => {
-        if (user.Admin) {
-          let OrderId = parseInt(req.params.id);
-          models.orders
-            .update({ Deleted: true }, { where: { OrderId: OrderId } })
-            .then(result => res.json({ message: 'Order successfully deleted.' }))
-            .catch(err => {
-              res.status(400).json({ message: "There was a problem deleting the order. Please make sure you are specifying the order id." });
-            })
-        } else {
-          res.status(401).json({ message: 'Unauthorized User' });
-        };
-      });
-  } else {
-    res.status(401).json({ message: 'Must be logged in' });
-  }
-});
 
 
 module.exports = router;
