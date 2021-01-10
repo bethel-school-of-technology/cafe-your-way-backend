@@ -11,7 +11,11 @@ var authService = require('../services/auth');
 
 // GET ALL products listing. (Accessible by All Users)
 router.get('/', function (req, res) {
-  models.products.findAll({}).then(products => {
+  models.products.findAll({
+    where: {
+      Deleted: false
+    }
+  }).then(products => {
     res.json({
       products
       //   These are the fields that are rendered from the products object:
@@ -65,6 +69,7 @@ router.post('/', function (req, res) {
               ProductName: req.body.ProductName,
               ProductPrice: req.body.ProductPrice,
               ImageUrl: req.body.ImageUrl,
+              Deleted: false
             }
           })
             .spread(function (result, created) {

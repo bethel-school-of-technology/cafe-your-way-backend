@@ -23,7 +23,8 @@ router.post('/signup', function (req, res) {
       State: req.body.State,
       ZipCode: req.body.ZipCode,
       PhoneNumber: req.body.PhoneNumber,
-      Password: authService.hashPassword(req.body.Password)
+      Password: authService.hashPassword(req.body.Password),
+      Deleted: false
     }
   })
     .spread(function (result, created) {
@@ -76,7 +77,11 @@ router.get('/', function (req, res) {
     authService.verifyUser(token)
       .then(user => {
         if (user.Admin) {
-          models.users.findAll({}).then(users => {
+          models.users.findAll({
+            where: {
+              Deleted: false
+            }
+          }).then(users => {
             res.json({
               users
               // These are the fields that are rendered from the users object:

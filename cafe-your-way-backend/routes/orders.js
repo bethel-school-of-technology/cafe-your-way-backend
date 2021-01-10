@@ -17,6 +17,9 @@ router.get('/', function (req, res) {
       .then(user => {
         if (user.Admin) {
           models.orders.findAll({
+            where: {
+              Delete: false
+            },
             include: [{
               model: models.products
             }]
@@ -61,7 +64,7 @@ router.get('/myOrders', function (req, res) {
       .then(user => {
         if (user) {
           models.orders.findAll({
-            where: { UserId: user.UserId },
+            where: { UserId: user.UserId, Deleted: false },
             include: [{
               model: models.products
             }]
@@ -169,6 +172,7 @@ router.post('/', function (req, res) {
             PhoneNumber: user.PhoneNumber,
             OrderTotal: req.body.OrderTotal,
             OrderDate: req.body.OrderDate,
+            Deleted: false
 
           })
             .then(function (createdOrder) {
