@@ -93,7 +93,7 @@ router.get('/myOrders', function (req, res) {
                   });
 
               } else {
-                res.json({ message: 'Orders not found' });
+                res.json({ message: 'Order(s) not found' });
               };
             })
         } else {
@@ -143,7 +143,7 @@ router.get('/:id', function (req, res) {
                   });
 
               } else {
-                res.json('Order not found');
+                res.json({ message: 'Order not found' });
               };
             })
         } else {
