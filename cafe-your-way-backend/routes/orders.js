@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
         if (user.Admin) {
           models.orders.findAll({
             where: {
-              Delete: false
+              Deleted: false
             },
             include: [{
               model: models.products
