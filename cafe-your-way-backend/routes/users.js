@@ -41,7 +41,7 @@ router.post('/signup', function (req, res) {
 
 
 
-// POST LOGIN (users login and JWT is returned as cookie. The authorization service used is  ".signUser ()" method".  User is authenticated with a JWT token. Also, checks if the requesting user is marked as an "Admin" in the database. (Accessible by All Users)
+// POST LOGIN (users login and JWT is returned as cookie. The authentication service used is  ".signUser()" method".  User is authenticated with a JWT token. Also, checks if the requesting user is marked as an "Admin" in the database. (Accessible by All Users)
 router.post('/login', function (req, res) {
   models.users.findOne({
     where: {
@@ -79,7 +79,7 @@ router.post('/logout', function (req, res) {
 
 
 
-// GET ALL users listing.  This route will use the authorization service .verifyUser() method.  (Admin Protected)
+// GET ALL users listing.  This route will use the authentication service .verifyUser() method.  (Admin Protected)
 router.get('/', function (req, res) {
   let token = req.cookies.jwt;
   if (token) {
@@ -147,7 +147,7 @@ router.get('/profile', function (req, res) {
 
 
 
-// GET BY ID users listing.  This route will use the authorization service .verifyUser() method.  (Admin Protected)
+// GET BY ID users listing.  This route will use the authentication service .verifyUser() method.  (Admin Protected)
 router.get('/:id', function (req, res) {
   let token = req.cookies.jwt;
   if (token) {
@@ -196,7 +196,7 @@ router.get('/:id', function (req, res) {
 
 
 
-// PUT Update User by ID.  This route will use the authorization service .verifyUser()method.  (Admin Protected)
+// PUT Update User by ID.  This route will use the authentication service .verifyUser()method.  (Admin Protected)
 router.put("/:id", function (req, res) {
   let token = req.cookies.jwt;
   if (token) {
@@ -224,7 +224,7 @@ router.put("/:id", function (req, res) {
 
 
 
-// DELETE User by ID. This route will use the authorization service .verifyUser()method. (Admin Protected)
+// DELETE User by ID. This route will use the authentication service .verifyUser()method. (Admin Protected)
 router.delete("/:id", function (req, res) {
   let token = req.cookies.jwt;
   if (token) {
